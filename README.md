@@ -1,6 +1,6 @@
-- 👋 Hey, I’m @09peter
+- 👋 Hey, I’m Peter
 - 👀 I’m interested in medical biology, machine learning, big data and infosec
-- 🌱 I’m currently learning GitHub and python
+- 🌱 I’m currently learning python
 
 <!---
 09peter/09peter is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
