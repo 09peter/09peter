@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Peter — A Year on Two Wheels</title>
+<style>
+  :root {
+    --bg: #fdfaf5;
+    --ink: #1a2332;
+    --muted: #5a6478;
+    --line: #e3dfd5;
+    --blue: #2c5282;
+    --green: #2f855a;
+    --red: #c53030;
+    --purple: #6b46c1;
+    --orange: #c05621;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+  .page {
+    max-width: 760px;
+    margin: 0 auto;
+    padding: 64px 32px 80px;
+  }
+  section {
+    padding: 48px 0;
+    border-bottom: 1px solid var(--line);
+  }
+  section:last-child { border-bottom: none; }
+  .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    font-weight: 600;
+  }
+  h1 {
+    font-size: 56px;
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    line-height: 1.05;
+    margin-top: 16px;
+  }
+  h1 .sub {
+    display: block;
+    font-size: 18px;
+    font-weight: 500;
+    color: var(--muted);
+    margin-top: 12px;
+    letter-spacing: normal;
+  }
+  h2 {
+    font-size: 28px;
+    font-weight: 700;
+    letter-spacing: -0.015em;
+    margin-bottom: 8px;
+  }
+  h2 + p.lead {
+    color: var(--muted);
+    margin-bottom: 24px;
+    font-size: 15px;
+  }
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 32px 40px;
+    margin-top: 32px;
+  }
+  .stats-4 { grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .stat .num {
+    font-size: 44px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .stat .lab {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    margin-top: 6px;
+    font-weight: 600;
+  }
+  .commute {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    gap: 24px;
+    align-items: center;
+    margin-top: 24px;
+  }
+  .commute-side {
+    text-align: center;
+    padding: 24px 16px;
+    border-radius: 8px;
+    background: rgba(44, 82, 130, 0.04);
+  }
+  .commute-side.home {
+    background: rgba(192, 86, 33, 0.05);
+  }
+  .commute-side .dir {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--muted);
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  .commute-side .place {
+    font-size: 22px;
+    font-weight: 700;
+    margin-bottom: 16px;
+  }
+  .commute-side .row {
+    font-size: 14px;
+    margin: 6px 0;
+    color: var(--muted);
+  }
+  .commute-side .row b {
+    color: var(--ink);
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .commute-arrow {
+    font-size: 24px;
+    color: var(--muted);
+  }
+  .punch {
+    margin-top: 24px;
+    font-size: 16px;
+    font-style: italic;
+    color: var(--muted);
+    text-align: center;
+  }
+  .crash-tag {
+    display: inline-block;
+    padding: 3px 10px;
+    background: var(--red);
+    color: white;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    border-radius: 3px;
+    text-transform: uppercase;
+    margin-bottom: 8px;
+  }
+  .quote {
+    margin-top: 24px;
+    padding: 20px 24px;
+    border-left: 3px solid var(--ink);
+    font-size: 17px;
+    font-style: italic;
+    color: var(--muted);
+  }
+  .cadence-pair {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    margin-top: 24px;
+  }
+  .cadence-card {
+    text-align: center;
+    padding: 28px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--line);
+  }
+  .cadence-card .ctx {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-weight: 700;
+    margin-bottom: 14px;
+  }
+  .cadence-card .rpm {
+    font-size: 64px;
+    font-weight: 800;
+    letter-spacing: -0.02em;
+    line-height: 1;
+  }
+  .cadence-card .unit {
+    font-size: 13px;
+    color: var(--muted);
+    margin-top: 6px;
+  }
+  .cadence-card.indoor .rpm { color: var(--purple); }
+  .cadence-card.outdoor .rpm { color: var(--orange); }
+  .funlist {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px 32px;
+    margin-top: 24px;
+  }
+  .funfact {
+    padding: 16px 0;
+    border-top: 1px solid var(--line);
+  }
+  .funfact .top {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--muted);
+    font-weight: 700;
+    margin-bottom: 6px;
+  }
+  .funfact .body { font-size: 17px; line-height: 1.4; }
+  .funfact b { font-weight: 800; }
+  .ladder {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+    margin-top: 24px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+  }
+  .step {
+    padding: 20px 16px;
+    text-align: center;
+    border-right: 1px solid var(--line);
+  }
+  .step:last-child { border-right: none; }
+  .step.now { background: rgba(44, 82, 130, 0.06); }
+  .step.goal { background: rgba(47, 133, 90, 0.07); }
+  .step .when {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    font-weight: 700;
+  }
+  .step .wkg {
+    font-size: 26px;
+    font-weight: 800;
+    margin: 6px 0 2px;
+    letter-spacing: -0.02em;
+  }
+  .step .cat {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  svg.fitness-chart {
+    width: 100%;
+    height: 180px;
+    margin-top: 20px;
+  }
+  .footer {
+    text-align: center;
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 2px solid var(--ink);
+  }
+  .footer .closer {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+  }
+  .footer .signature {
+    margin-top: 12px;
+    font-size: 13px;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+  }
+  @media (max-width: 600px) {
+    .page { padding: 40px 20px 60px; }
+    h1 { font-size: 40px; }
+    .stats-4 { grid-template-columns: repeat(2, 1fr); }
+    .commute { grid-template-columns: 1fr; }
+    .commute-arrow { transform: rotate(90deg); }
+    .cadence-pair, .funlist, .ladder { grid-template-columns: 1fr; }
+    .ladder .step { border-right: none; border-bottom: 1px solid var(--line); }
+    .stat .num { font-size: 36px; }
+  }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HERO -->
+  <section style="border-bottom: 2px solid var(--ink); padding-bottom: 40px;">
+    <div class="label">Peter / May 2025 — May 2026</div>
+    <h1>A Year on Two Wheels<span class="sub">Korneuburg ↔ Vienna, plus the occasional escape</span></h1>
+    <div class="stats stats-4">
+      <div class="stat"><div class="num">80</div><div class="lab">Rides</div></div>
+      <div class="stat"><div class="num">1,600<span style="font-size:24px;color:var(--muted);"> km</span></div><div class="lab">Distance</div></div>
+      <div class="stat"><div class="num">71<span style="font-size:24px;color:var(--muted);"> hrs</span></div><div class="lab">In the saddle</div></div>
+      <div class="stat"><div class="num">5,973<span style="font-size:24px;color:var(--muted);"> m</span></div><div class="lab">Climbed</div></div>
+    </div>
+  </section>
+
+  <!-- THE RIDER -->
+  <section>
+    <div class="label">The Rider</div>
+    <h2>One 38-year-old, one bike, one daily commute.</h2>
+    <p class="lead">105 kg. 180 cm. Cube Nuroad gravel for commuting. Orbea Orca for the fun. Most of my training plan is called "going to work."</p>
+  </section>
+
+  <!-- THE COMMUTE -->
+  <section>
+    <div class="label">The Commute</div>
+    <h2>Same road. Two different rides.</h2>
+    <p class="lead">31 trips between Korneuburg and Vienna. The data thinks they're separate workouts.</p>
+    <div class="commute">
+      <div class="commute-side">
+        <div class="dir">Outbound</div>
+        <div class="place">→ Vienna</div>
+        <div class="row"><b>17</b> rides</div>
+        <div class="row"><b>25.6</b> km/h average</div>
+        <div class="row">avg HR <b>151</b> bpm</div>
+        <div class="row" style="margin-top:10px;font-size:12px;color:var(--blue);font-weight:600;">tempo zone</div>
+      </div>
+      <div class="commute-arrow">⇄</div>
+      <div class="commute-side home">
+        <div class="dir">Homeward</div>
+        <div class="place">→ Korneuburg</div>
+        <div class="row"><b>14</b> rides</div>
+        <div class="row"><b>26.0</b> km/h average</div>
+        <div class="row">avg HR <b>159</b> bpm</div>
+        <div class="row" style="margin-top:10px;font-size:12px;color:var(--orange);font-weight:600;">threshold zone</div>
+      </div>
+    </div>
+    <p class="punch">All three of my fastest commutes were going home.</p>
+  </section>
+
+  <!-- HIDDEN WORKOUT -->
+  <section>
+    <div class="label">The Hidden Workout</div>
+    <h2>I've been training without noticing.</h2>
+    <div class="stats">
+      <div class="stat"><div class="num" style="color:var(--blue);">~166 W</div><div class="lab">Avg commute power</div></div>
+      <div class="stat"><div class="num" style="color:var(--blue);">85<span style="font-size:24px;">%</span></div><div class="lab">of estimated FTP</div></div>
+    </div>
+    <p class="lead" style="margin-top: 24px;">Every commute is essentially a tempo workout. Add it up: <b style="color:var(--ink);">593 km</b> and <b style="color:var(--ink);">23 hours</b> of tempo riding from commuting alone. That's a training plan. I just don't tell anyone.</p>
+  </section>
+
+  <!-- FITNESS V-CURVE -->
+  <section>
+    <div class="label">Fitness, Charted</div>
+    <h2>Up. Down. Back up.</h2>
+    <p class="lead">Efficiency factor (km/h ÷ bpm) — higher is fitter.</p>
+
+    <svg class="fitness-chart" viewBox="0 0 700 180" preserveAspectRatio="none">
+      <!-- gridlines -->
+      <line x1="0" y1="40" x2="700" y2="40" stroke="#e3dfd5" stroke-width="1"/>
+      <line x1="0" y1="90" x2="700" y2="90" stroke="#e3dfd5" stroke-width="1"/>
+      <line x1="0" y1="140" x2="700" y2="140" stroke="#e3dfd5" stroke-width="1"/>
+
+      <!-- winter shaded band -->
+      <rect x="340" y="0" width="90" height="180" fill="#cce4f7" opacity="0.4"/>
+
+      <!-- the V-shape curve, smoothed -->
+      <path d="M 30,90 C 70,80 110,55 150,45 S 220,40 270,45 S 320,55 360,80 L 390,140 L 430,135 L 470,100 L 530,75 L 600,55 L 670,50"
+            fill="none" stroke="#2f855a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+
+      <!-- peak marker -->
+      <circle cx="220" cy="40" r="5" fill="#2f855a"/>
+      <text x="220" y="28" font-size="11" fill="#1a2332" font-weight="700" text-anchor="middle">Peak — Aug 2025</text>
+
+      <!-- crash marker -->
+      <circle cx="390" cy="140" r="5" fill="#c53030"/>
+      <text x="395" y="160" font-size="11" fill="#c53030" font-weight="700">Hip met ice. Ice won.</text>
+
+      <!-- recent marker -->
+      <circle cx="670" cy="50" r="5" fill="#2c5282"/>
+      <text x="665" y="38" font-size="11" fill="#1a2332" font-weight="700" text-anchor="end">Within 4% of peak</text>
+
+      <!-- x-axis -->
+      <text x="30" y="175" font-size="10" fill="#5a6478">May '25</text>
+      <text x="210" y="175" font-size="10" fill="#5a6478" text-anchor="middle">Aug '25</text>
+      <text x="385" y="175" font-size="10" fill="#5a6478" text-anchor="middle">winter break</text>
+      <text x="550" y="175" font-size="10" fill="#5a6478" text-anchor="middle">Mar '26</text>
+      <text x="670" y="175" font-size="10" fill="#5a6478" text-anchor="end">May '26</text>
+    </svg>
+  </section>
+
+  <!-- THE HEART -->
+  <section>
+    <div class="label">The Heart of the Beast</div>
+    <h2>Heart rate recovery says: well-trained.</h2>
+    <div class="stats">
+      <div class="stat"><div class="num" style="color:var(--red);">52 <span style="font-size:24px;">bpm</span></div><div class="lab">Single biggest HR drop in 60s</div></div>
+      <div class="stat"><div class="num">30 <span style="font-size:24px;">bpm</span></div><div class="lab">Typical drop per ride</div></div>
+    </div>
+    <p class="lead" style="margin-top: 24px;">25–30 bpm puts you at "fit recreational." 30+ is "well-trained." Stable across the year — neither winter nor crash dented it. Even better at 105 kg, where the heart is moving more weight against gravity.</p>
+  </section>
+
+  <!-- THE SURPRISE -->
+  <section>
+    <div class="label">The Surprise</div>
+    <h2>I get faster on long rides.</h2>
+    <p class="lead">Most amateurs fade after 90 minutes. I systematically <i>negative-split</i> — finishing stronger than I started. The data is unambiguous on this.</p>
+    <div class="stats">
+      <div class="stat"><div class="num" style="color:var(--green);">−1.3<span style="font-size:24px;">%</span></div><div class="lab">Median decoupling, rides &gt; 90 min</div></div>
+      <div class="stat"><div class="num">~6 <span style="font-size:24px;">hrs</span></div><div class="lab">Longest ride — and held pace</div></div>
+    </div>
+    <p class="punch">Apparently I have an aerobic engine.</p>
+  </section>
+
+  <!-- THE CONFESSION -->
+  <section>
+    <div class="label">The Confession</div>
+    <h2>I have two pedaling personalities.</h2>
+    <div class="cadence-pair">
+      <div class="cadence-card indoor">
+        <div class="ctx">On Zwift</div>
+        <div class="rpm">88</div>
+        <div class="unit">RPM — efficient zone</div>
+      </div>
+      <div class="cadence-card outdoor">
+        <div class="ctx">Outdoors</div>
+        <div class="rpm">73</div>
+        <div class="unit">RPM — known grinder</div>
+      </div>
+    </div>
+    <div class="quote">"More Jan Ullrich than Lance Armstrong, I have to admit."</div>
+    <p class="lead" style="margin-top:24px;">27% of outdoor pedaling is below 70 RPM. The aerobic system can absolutely handle spinning faster — the legs and gear-selection habits are the holdouts. To-do for next year.</p>
+  </section>
+
+  <!-- BY THE NUMBERS -->
+  <section>
+    <div class="label">By the Numbers</div>
+    <h2>Fun things hidden in the data.</h2>
+    <div class="funlist">
+      <div class="funfact">
+        <div class="top">Top speed</div>
+        <div class="body"><b>60.5 km/h</b> on a real road, July 13, 2025. Faster than the speed limit through most of Vienna.</div>
+      </div>
+      <div class="funfact">
+        <div class="top">Distance equivalent</div>
+        <div class="body">1,462 km outdoor — about <b>1.4× Vienna → Venlo</b> in the Netherlands.</div>
+      </div>
+      <div class="funfact">
+        <div class="top">Climbed</div>
+        <div class="body">5,973 m — that's <b>1.6 Mt. Fujis</b>.</div>
+      </div>
+      <div class="funfact">
+        <div class="top">Calories burned</div>
+        <div class="body">~40,000 kcal — equivalent to <b>71 Big Macs</b>.</div>
+      </div>
+      <div class="funfact">
+        <div class="top">Tuesdays</div>
+        <div class="body"><b>30 of 80 rides</b> happened on a Tuesday. The bike has a favorite weekday.</div>
+      </div>
+      <div class="funfact">
+        <div class="top">Centuries</div>
+        <div class="body"><b>Zero</b> rides over 100 km this year. Next year's homework.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LOOKING AHEAD -->
+  <section>
+    <div class="label">The Math of Next Year</div>
+    <h2>Same engine. Lighter rider.</h2>
+    <p class="lead">Power-to-weight is what cycling rewards, especially climbing. The engine's already there — the lever is the denominator.</p>
+    <div class="ladder">
+      <div class="step now">
+        <div class="when">Today</div>
+        <div class="wkg">1.86</div>
+        <div class="cat">W/kg @ 105 kg</div>
+      </div>
+      <div class="step">
+        <div class="when">−10 kg</div>
+        <div class="wkg">2.05</div>
+        <div class="cat">W/kg @ 95 kg</div>
+      </div>
+      <div class="step">
+        <div class="when">−15 kg</div>
+        <div class="wkg">2.16</div>
+        <div class="cat">W/kg @ 90 kg</div>
+      </div>
+      <div class="step goal">
+        <div class="when">−20 kg</div>
+        <div class="wkg">2.30</div>
+        <div class="cat">Cat 5 racer territory</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div class="closer">80 rides. 10 months. 1 crash.<br>Still climbing.</div>
+    <div class="signature">— Peter, May 2026 —</div>
+  </div>
+
+</div>
+</body>
+</html>
